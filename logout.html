@@ -6,10 +6,32 @@
     <title>MEERKAT - Logout</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="dashboard-body">
-    <div class="logout-container">
-        <h1>Logout Page</h1>
-        <p>This page will be implemented later.</p>
+<body class="login-body">
+    <div class="login-container">
+        <img src="images/brown box.png" alt="Background Shape" class="background-shape">
+        <div class="login-circle">
+            <h1>Logout</h1>
+            <p class="logout-message">By clicking logout you won't have access to the dashboard until you log back in.</p>
+            <div class="logout-buttons">
+                <button class="cancel-btn" onclick="window.history.back()">Cancel</button>
+                <button class="logout-btn" onclick="confirmLogout()">Logout</button>
+            </div>
+        </div>
+        <div class="meerkat-decoration">
+            <img src="images/meercat.png" alt="Meerkat">
+        </div>
     </div>
+
+    <script>
+        function confirmLogout() {
+            // Clear any stored user data
+            localStorage.removeItem('jobApplications');
+            localStorage.removeItem('userSettings');
+            localStorage.removeItem('userSession');
+            
+            // Redirect to login page
+            window.location.href = 'index.html';
+        }
+    </script>
 </body>
 </html> 

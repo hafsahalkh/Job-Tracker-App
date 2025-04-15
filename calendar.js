@@ -7,15 +7,38 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCalendar();
     
     // Add event listeners for navigation
-    document.getElementById('prevMonth').addEventListener('click', () => {
-        currentDate.setMonth(currentDate.getMonth() - 1);
+    const prevMonthBtn = document.getElementById('prevMonth');
+    const nextMonthBtn = document.getElementById('nextMonth');
+    const currentMonthSpan = document.getElementById('currentMonth');
+    const todayBtn = document.getElementById('todayBtn');
+    
+    function updateCurrentMonthDisplay() {
+        currentMonthSpan.textContent = currentDate.toLocaleString('default', { 
+            month: 'long', 
+            year: 'numeric' 
+        });
+    }
+    
+    prevMonthBtn.addEventListener('click', () => {
+        currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+        updateCurrentMonthDisplay();
         renderCalendar();
     });
     
-    document.getElementById('nextMonth').addEventListener('click', () => {
-        currentDate.setMonth(currentDate.getMonth() + 1);
+    nextMonthBtn.addEventListener('click', () => {
+        currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
+        updateCurrentMonthDisplay();
         renderCalendar();
     });
+
+    todayBtn.addEventListener('click', () => {
+        currentDate = new Date();
+        updateCurrentMonthDisplay();
+        renderCalendar();
+    });
+    
+    // Initialize the current month display
+    updateCurrentMonthDisplay();
     
     // Add event listeners for view switching
     const viewButtons = document.querySelectorAll('.view-btn');

@@ -87,3 +87,33 @@ const createApplicationForm = () => {
     `;
     // Implementation to display the form will be added here
 };
+
+document.addEventListener('DOMContentLoaded', function() {
+    const prevMonthBtn = document.getElementById('prevMonth');
+    const nextMonthBtn = document.getElementById('nextMonth');
+    const currentMonthSpan = document.getElementById('currentMonth');
+    
+    let currentDate = new Date();
+    
+    function updateCurrentMonthDisplay() {
+        currentMonthSpan.textContent = currentDate.toLocaleString('default', { 
+            month: 'long', 
+            year: 'numeric' 
+        });
+    }
+    
+    prevMonthBtn.addEventListener('click', () => {
+        currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+        updateCurrentMonthDisplay();
+        // Add your calendar update logic here
+    });
+    
+    nextMonthBtn.addEventListener('click', () => {
+        currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
+        updateCurrentMonthDisplay();
+        // Add your calendar update logic here
+    });
+    
+    // Initialize the current month display
+    updateCurrentMonthDisplay();
+});
