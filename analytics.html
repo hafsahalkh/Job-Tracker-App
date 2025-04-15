@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEERKAT - Analytics</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dashboard-body">
+    <header class="dashboard-header">
+        <div class="header-logo">
+            <img src="images/logo.png" alt="Meerkat Logo">
+            <h1>Job Application Tracker</h1>
+        </div>
+        <div class="profile-icon">
+            <img src="images/profile-icon.png" alt="Profile" style="width: 25px; height: 25px;">
+        </div>
+    </header>
+
+    <div class="dashboard-layout">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Dashboard</h2>
+            </div>
+            <ul>
+                <li><a href="analytics.html" class="active">Analytics</a></li>
+                <li><a href="applications.html">Applications</a></li>
+                <li><a href="calendar.html">Calendar</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+            <ul class="bottom-menu">
+                <li><a href="#">Help</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+
+        <main class="dashboard-content">
+            <div class="analytics-header">
+                <h1>Analytics</h1>
+                <div class="analytics-controls">
+                    <select id="timeRange" class="time-range-select">
+                        <option value="90">Last 90 Days</option>
+                        <option value="30">Last 30 Days</option>
+                        <option value="7">Last 7 Days</option>
+                        <option value="all">All Time</option>
+                    </select>
+                    <button class="export-btn">Export Report</button>
+                </div>
+            </div>
+
+            <div class="analytics-grid">
+                <div class="metric-card">
+                    <h3>Total Applications</h3>
+                    <div class="metric-value" id="totalApplications">47</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Interviews Scheduled</h3>
+                    <div class="metric-value" id="totalInterviews">12</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Response Rate</h3>
+                    <div class="metric-value" id="responseRate">36%</div>
+                </div>
+            </div>
+
+            <div class="analytics-charts">
+                <div class="chart-container">
+                    <h3>Application Status</h3>
+                    <canvas id="statusChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-timeline" id="recentActivity">
+                        <!-- Activity items will be added here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="analytics-bottom">
+                <div class="sources-container">
+                    <h3>Application Sources</h3>
+                    <div class="sources-bar">
+                        <div class="source linkedin" style="width: 60%">LinkedIn 60%</div>
+                        <div class="source company" style="width: 30%">Company site 30%</div>
+                        <div class="source other" style="width: 10%">Other 10%</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="auth.js"></script>
+    <script src="analytics.js"></script>
+</body>
+</html> 

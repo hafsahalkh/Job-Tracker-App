@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEERKAT - Applications</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dashboard-body">
+    <header class="dashboard-header">
+        <div class="header-logo">
+            <img src="images/logo.png" alt="Meerkat Logo">
+            <h1>Job Application Tracker</h1>
+        </div>
+        <div class="profile-icon">
+            <img src="images/profile-icon.png" alt="Profile" style="width: 25px; height: 25px;">
+        </div>
+    </header>
+
+    <div class="dashboard-layout">
+        <!-- Left Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Dashboard</h2>
+            </div>
+            <ul>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="applications.html" class="active">Applications</a></li>
+                <li><a href="calendar.html">Calendar</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+            <ul class="bottom-menu">
+                <li><a href="#">Help</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="applications-header">
+                <h1>Applications</h1>
+                <div class="applications-controls">
+                    <input type="text" id="searchInput" placeholder="Search filters..." class="search-input">
+                    <div class="filter-dropdown">
+                        <button class="filter-btn">Filter ▼</button>
+                        <div class="filter-content">
+                            <label><input type="checkbox" value="applied" checked> Applied</label>
+                            <label><input type="checkbox" value="interview" checked> Interview</label>
+                            <label><input type="checkbox" value="offer" checked> Offer</label>
+                            <label><input type="checkbox" value="rejected" checked> Rejected</label>
+                            <button id="applyFilterBtn" class="apply-filter-btn">Apply Filters</button>
+                        </div>
+                    </div>
+                    <button class="add-job-btn">+ Add Job</button>
+                </div>
+            </div>
+
+            <div class="applications-table">
+                <div class="table-header">
+                    <div class="header-cell">Company</div>
+                    <div class="header-cell">Position</div>
+                    <div class="header-cell">Date Applied</div>
+                    <div class="header-cell">Status</div>
+                    <div class="header-cell">Actions</div>
+                </div>
+                <div class="table-body" id="applicationsTableBody">
+                    <!-- Table rows will be dynamically added here -->
+                </div>
+
+                <!-- Add this pagination footer -->
+                <div class="pagination-footer">
+                    <div class="pagination-info">
+                        Showing <span id="startRange">1</span>-<span id="endRange">5</span> of <span id="totalCount">0</span> Applications
+                    </div>
+                    <div class="pagination-controls">
+                        <button class="pagination-btn" id="prevPage" disabled>
+                            <span class="arrow">←</span>
+                        </button>
+                        <button class="pagination-btn" id="nextPage" disabled>
+                            <span class="arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Job Modal -->
+            <div id="addJobModal" class="modal">
+                <div class="modal-content">
+                    <h3>Add New Job Application</h3>
+                    <form id="addJobForm">
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="position">Position</label>
+                            <input type="text" id="position" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateApplied">Date Applied</label>
+                            <input type="date" id="dateApplied" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="applicationSource">Application Source</label>
+                            <select id="applicationSource" required>
+                                <option value="">Select source...</option>
+                                <option value="linkedin">LinkedIn</option>
+                                <option value="indeed">Indeed</option>
+                                <option value="company_website">Company Website</option>
+                                <option value="employee_referral">Employee Referral</option>
+                                <option value="glassdoor">Glassdoor</option>
+                                <option value="ziprecruiter">ZipRecruiter</option>
+                                <option value="job_fair">Job Fair/Career Event</option>
+                                <option value="professional_network">Professional Network</option>
+                                <option value="university">University/College Recruiting</option>
+                                <option value="internal">Internal Transfer/Promotion</option>
+                                <option value="social_media">Social Media</option>
+                                <option value="company_ats">Company ATS</option>
+                                <option value="cold_application">Cold Application/Outreach</option>
+                                <option value="job_board_other">Job Board - Other</option>
+                                <option value="referral_other">Referral - Other</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="otherSourceGroup" style="display: none;">
+                            <label for="otherSource">Please specify source</label>
+                            <input type="text" id="otherSource">
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select id="status" required>
+                                <option value="applied">Applied</option>
+                                <option value="interview">Interview</option>
+                                <option value="offer">Offer</option>
+                                <option value="rejected">Rejected</option>
+                            </select>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="gotResponse">
+                                <span>Received initial response from company</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes">Notes</label>
+                            <textarea id="notes"></textarea>
+                        </div>
+                        <div class="modal-buttons">
+                            <button type="submit" class="save-btn">Save</button>
+                            <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="auth.js"></script>
+    <script src="applications.js"></script>
+</body>
+</html> 

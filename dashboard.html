@@ -7,39 +7,41 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="dashboard-body">
-    <div class="dashboard-container">
-        <header>
-            <div class="logo">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTgwIj48c3R5bGU+LnN0MHtmaWxsOiMwMDA7fTwvc3R5bGU+PHBhdGggY2xhc3M9InN0MCIgZD0iTTUwLDQwYzE0LDAsMjUtMTUsMjUtMjVINTB2MjVaIi8+PHBhdGggY2xhc3M9InN0MCIgZD0iTTUwLDQwYy0xNCwwLTI1LTE1LTI1LTI1SDUwdjI1WiIvPjxjaXJjbGUgY2xhc3M9InN0MCIgY3g9IjMzIiBjeT0iNTAiIHI9IjgiLz48Y2lyY2xlIGNsYXNzPSJzdDAiIGN4PSI2NyIgY3k9IjUwIiByPSI4Ii8+PGNpcmNsZSBjbGFzcz0ic3QwIiBjeD0iNTAiIGN5PSI2OCIgcj0iNSIvPjxyZWN0IHg9IjM1IiB5PSI4MCIgd2lkdGg9IjMwIiBoZWlnaHQ9IjYwIiBjbGFzcz0ic3QwIi8+PHBhdGggY2xhc3M9InN0MCIgZD0iTTUwLDE0MGwxNSwyMEg2MHYyMEg0MHYtMjBIMjVsNS0xMGgxMHYtMTBoMTB2MTBoMTBsLTEwLDEwWiIvPjwvc3ZnPg==" alt="Meerkat Logo">
-                <h1>MEERKAT</h1>
-            </div>
-            <div class="user-controls">
-                <a href="#">Settings</a>
-                <a href="index.html">Logout</a>
-            </div>
-        </header>
-
-        <div class="main-dashboard">
-            <div class="dashboard-card">
-                <h2>Application Overview</h2>
-                <p>You have <strong>0</strong> active job applications.</p>
-                <p>Track your job applications, interviews, and offers all in one place.</p>
-            </div>
-
-            <div class="dashboard-card">
-                <h2>Application Status</h2>
-                <p>No applications to display.</p>
-            </div>
+    <!-- Header with logo and profile -->
+    <header class="dashboard-header">
+        <div class="header-logo">
+            <img src="images/logo.png" alt="Meerkat Logo">
+            <h1>Job Application Tracker</h1>
         </div>
-
-        <div class="action-buttons">
-            <button id="new-application-btn" class="btn">New Application</button>
-            <button id="view-applications-btn" class="btn">View Applications</button>
-            <button id="analytics-btn" class="btn">Analytics</button>
-            <button id="settings-btn" class="btn">Settings</button>
+        <div class="profile-icon">
+            <img src="images/profile-icon.png" alt="Profile" style="width: 25px; height: 25px;">
         </div>
+    </header>
+
+    <div class="dashboard-layout">
+        <!-- Left Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Dashboard</h2>
+            </div>
+            <ul>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="applications.html">Applications</a></li>
+                <li><a href="calendar.html">Calendar</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+            <ul class="bottom-menu">
+                <li><a href="#">Help</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area - Empty for now -->
+        <main class="main-content">
+            <h1>Dashboard</h1>
+            <!-- Dashboard content will be implemented later -->
+        </main>
     </div>
-
-    <script src="script.js"></script>
+    <script src="auth.js"></script>
 </body>
 </html>

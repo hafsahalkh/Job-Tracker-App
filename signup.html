@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEERKAT - Sign Up</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <img src="images/brown box.png" alt="Background shape">
+    </div>
+    <div class="login-circle">
+        <h1>Sign Up</h1>
+        
+        <form id="signup-form">
+            <div class="form-group underline">
+                <input type="text" id="username" name="username" placeholder="Enter Username" required>
+            </div>
+            
+            <div class="form-group underline">
+                <input type="email" id="email" name="email" placeholder="Enter Email Address" required>
+            </div>
+            
+            <div class="form-group underline">
+                <input type="password" id="password" name="password" placeholder="Enter Password" required>
+            </div>
+            
+            <div class="form-group underline">
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
+            </div>
+            
+            <button type="submit" class="sign-in-btn">Create Account</button>
+            
+            <div class="new-user">
+                <a href="login.html">Already have an account? Login</a>
+            </div>
+        </form>
+    </div>
+    
+    <div class="meerkat-decoration">
+        <img src="images/meercat.png" alt="Meerkat" style="margin-right: 150px; margin-bottom: 20px; size: 50px;">
+    </div>
+
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            if (username && email && password && confirmPassword) {
+                // Here you would typically make an API call to create the account
+                alert('Account created successfully!');
+                window.location.href = 'login.html';
+            } else {
+                alert('Please fill in all fields');
+            }
+        });
+    </script>
+</body>
+</html> 

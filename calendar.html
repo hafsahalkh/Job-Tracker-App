@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEERKAT - Calendar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dashboard-body">
+    <header class="dashboard-header">
+        <div class="header-logo">
+            <img src="images/logo.png" alt="Meerkat Logo">
+            <h1>Job Application Tracker</h1>
+        </div>
+        <div class="profile-icon">
+            <img src="images/profile-icon.png" alt="Profile" style="width: 35px; height: 35px;">
+        </div>
+    </header>
+
+    <div class="dashboard-layout">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Dashboard</h2>
+            </div>
+            <ul>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="applications.html">Applications</a></li>
+                <li><a href="calendar.html" class="active">Calendar</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+            <ul class="bottom-menu">
+                <li><a href="#">Help</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <div class="view-options">
+                <button class="view-btn active">Month</button>
+                <button class="view-btn">Week</button>
+                <button class="view-btn">Day</button>
+            </div>
+            
+            <div class="calendar-container">
+                <div class="calendar-navigation">
+                    <button id="prevMonth">&lt;</button>
+                    <span id="currentMonth"></span>
+                    <button id="nextMonth">&gt;</button>
+                </div>
+
+                <div class="calendar-weekdays">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>
+                
+                <div id="calendarDays" class="calendar-days"></div>
+            </div>
+
+            <!-- Add Event Modal -->
+            <div id="eventModal" class="modal">
+                <div class="modal-content">
+                    <h3>Add Interview/Event</h3>
+                    <form id="eventForm">
+                        <div class="form-group">
+                            <label for="eventTitle">Title</label>
+                            <input type="text" id="eventTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventDate">Date</label>
+                            <input type="date" id="eventDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventTime">Time</label>
+                            <input type="time" id="eventTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventType">Type</label>
+                            <select id="eventType">
+                                <option value="interview">Interview</option>
+                                <option value="followup">Follow-up</option>
+                                <option value="deadline">Application Deadline</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventNotes">Notes</label>
+                            <textarea id="eventNotes"></textarea>
+                        </div>
+                        <div class="modal-buttons">
+                            <button type="submit" class="save-btn">Save</button>
+                            <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="calendar.js"></script>
+</body>
+</html> 
