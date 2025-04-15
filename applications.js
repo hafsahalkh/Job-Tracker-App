@@ -64,6 +64,7 @@ function handleAddJob(e) {
         id: Date.now(),
         company: document.getElementById('company').value,
         position: document.getElementById('position').value,
+        salary: document.getElementById('salary').value ? parseInt(document.getElementById('salary').value) : null,
         dateApplied: document.getElementById('dateApplied').value,
         applicationSource: applicationSource,
         status: document.getElementById('status').value,
@@ -139,6 +140,7 @@ function renderApplications(apps = applications) {
         row.innerHTML = `
             <div>${app.company}</div>
             <div>${app.position}</div>
+            <div>${app.salary ? '$' + app.salary.toLocaleString() : '-'}</div>
             <div>${formatDate(app.dateApplied)}</div>
             <div><span class="status-badge status-${app.status}">${capitalizeFirst(app.status)}</span></div>
             <div class="action-buttons">
@@ -165,6 +167,7 @@ function editApplication(id) {
 
     document.getElementById('company').value = app.company;
     document.getElementById('position').value = app.position;
+    document.getElementById('salary').value = app.salary || '';
     document.getElementById('dateApplied').value = app.dateApplied;
     document.getElementById('applicationSource').value = app.applicationSource;
     
