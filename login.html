@@ -45,18 +45,55 @@
     </div>
 
     <script>
+        function validatePassword(password) {
+            const minLength = 8;
+            const hasCapital = /[A-Z]/.test(password);
+            const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            
+            const requirements = {
+                length: password.length >= minLength,
+                capital: hasCapital,
+                special: hasSpecial
+            };
+            
+            return requirements;
+        }
+
+        function getErrorMessage(requirements) {
+            const missing = [];
+            if (!requirements.length) missing.push("at least 8 characters");
+            if (!requirements.capital) missing.push("a capital letter");
+            if (!requirements.special) missing.push("a special character");
+            
+            if (missing.length === 0) return "";
+            
+            return "Password must contain " + missing.join(", ");
+        }
+
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
-            if (username && password) {
-                // Set authentication state
-                localStorage.setItem('isLoggedIn', 'true');
-                window.location.href = 'analytics.html';
-            } else {
+            // First check if all fields are filled
+            if (!username || !password) {
                 alert('Please enter your username and password');
+                return;
             }
+
+            // Validate password requirements
+            const requirements = validatePassword(password);
+            const isValid = Object.values(requirements).every(req => req);
+            
+            if (!isValid) {
+                const errorMessage = getErrorMessage(requirements);
+                alert('Invalid password format. ' + errorMessage);
+                return;
+            }
+            
+            // If validation passes, proceed with login
+            localStorage.setItem('isLoggedIn', 'true');
+            window.location.href = 'analytics.html';
         });
     </script>
 </body>
