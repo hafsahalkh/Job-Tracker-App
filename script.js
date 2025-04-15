@@ -105,13 +105,13 @@ document.addEventListener('DOMContentLoaded', function() {
     prevMonthBtn.addEventListener('click', () => {
         currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
         updateCurrentMonthDisplay();
-        // Add your calendar update logic here
+        // Add calendar update logic here
     });
     
     nextMonthBtn.addEventListener('click', () => {
         currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
         updateCurrentMonthDisplay();
-        // Add your calendar update logic here
+        // Add calendar update logic here
     });
     
     // Initialize the current month display

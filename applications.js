@@ -1,11 +1,11 @@
 // Store applications data
 let applications = [];
 
-// Add these variables at the top of your file
 const ITEMS_PER_PAGE = 5;
 let currentPage = 1;
 let activeFilters = ['applied', 'interview', 'offer', 'rejected'];
 let searchTerm = '';
+let editingAppId = null;
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', () => {
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load any existing applications
     loadApplications();
 
-    // Add this after your document.ready function
+
     document.getElementById('applicationSource').addEventListener('change', function(e) {
         const otherSourceGroup = document.getElementById('otherSourceGroup');
         otherSourceGroup.style.display = e.target.value === 'other' ? 'block' : 'none';
@@ -46,6 +46,7 @@ function openModal() {
 function closeModal() {
     const modal = document.getElementById('addJobModal');
     modal.style.display = 'none';
+    editingAppId = null; // Reset edit mode
 }
 
 function handleAddJob(e) {
@@ -53,15 +54,12 @@ function handleAddJob(e) {
 
     const sourceSelect = document.getElementById('applicationSource');
     let applicationSource = sourceSelect.value;
-    
-    // If "Other" is selected, use the specified text
     if (applicationSource === 'other') {
         const otherSourceText = document.getElementById('otherSource').value.trim();
         applicationSource = otherSourceText || 'Other';
     }
 
-    const newJob = {
-        id: Date.now(),
+    const jobData = {
         company: document.getElementById('company').value,
         position: document.getElementById('position').value,
         salary: document.getElementById('salary').value ? parseInt(document.getElementById('salary').value) : null,
@@ -72,13 +70,30 @@ function handleAddJob(e) {
         notes: document.getElementById('notes').value
     };
 
-    applications.push(newJob);
+    if (editingAppId !== null) {
+        // Edit mode: update existing job
+        const idx = applications.findIndex(a => a.id === editingAppId);
+        if (idx !== -1) {
+            applications[idx] = { ...applications[idx], ...jobData };
+        }
+    } else {
+        // Add mode: create new job
+        const newJob = {
+            id: Date.now(),
+            ...jobData
+        };
+        applications.push(newJob);
+    }
+
     saveApplications();
     renderApplications();
     updateAnalytics();
     closeModal();
     e.target.reset();
     document.getElementById('otherSourceGroup').style.display = 'none';
+    editingAppId = null; // Always reset after save
+
+    alert('Application saved!');
 }
 
 function handleSearch(e) {
@@ -165,6 +180,8 @@ function editApplication(id) {
     const app = applications.find(a => a.id === id);
     if (!app) return;
 
+    editingAppId = id; // Set edit mode
+
     document.getElementById('company').value = app.company;
     document.getElementById('position').value = app.position;
     document.getElementById('salary').value = app.salary || '';
@@ -184,7 +201,6 @@ function editApplication(id) {
     document.getElementById('notes').value = app.notes;
 
     openModal();
-    applications = applications.filter(a => a.id !== id);
 }
 
 function deleteApplication(id) {
@@ -223,7 +239,7 @@ function setupPaginationControls() {
     });
 }
 
-// Add this function to handle the filter dropdown toggle
+// handle the filter dropdown toggle
 function setupFilterDropdown() {
     const filterBtn = document.querySelector('.filter-btn');
     const filterDropdown = document.querySelector('.filter-dropdown');
@@ -241,7 +257,7 @@ function setupFilterDropdown() {
     });
 }
 
-// Add this function to handle filter application
+// handle filter application
 function setupFilterApplication() {
     const applyFilterBtn = document.getElementById('applyFilterBtn');
     const checkboxes = document.querySelectorAll('.filter-content input[type="checkbox"]');
@@ -270,7 +286,7 @@ function setupFilterApplication() {
     });
 }
 
-// Add this function to combine search and filter functionality
+// combine search and filter functionality
 function applyFiltersAndSearch() {
     const filteredApplications = applications.filter(app => {
         const matchesSearch = 
@@ -283,7 +299,7 @@ function applyFiltersAndSearch() {
     renderApplications(filteredApplications);
 }
 
-// Add styles for no results message
+// styles for no results message
 const styles = `
 .no-results {
     padding: 2rem;
